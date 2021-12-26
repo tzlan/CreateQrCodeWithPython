@@ -1,6 +1,26 @@
-import qrcode
+from qrcode.main import QRCode
+from qrcode.main import make  # noqa
+from qrcode.constants import (  # noqa
+    ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, ERROR_CORRECT_H)
 
-qr = qrcode.QRCode(
+from qrcode import image  # noqa
+
+
+def run_example(data="https://www.youtube.com/channel/UCtojr-ULCp1Y6RSwQtaM6HQ", *args, **kwargs):
+
+    qr = QRCode(*args, **kwargs)
+    qr.add_data(data)
+
+    im = qr.make_image()
+    im.show()
+
+
+if __name__ == '__main__':  # pragma: no cover
+    import sys
+    run_example(*sys.argv[1:])
+
+
+qr = QRCode(
 
     version = 1,
     box_size=50,
